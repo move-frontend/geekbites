@@ -9,7 +9,7 @@
     "start": "rimraf dist && eleventy --serve",
     "check-broken-links": "npm run check-broken-links:internal && npm run check-broken-links:external",
     "check-broken-links:internal": "npx broken-link-checker-local ./dist -roe --filter-level 3 --exclude \"*/__/firebase/*\"",
-    "check-broken-links:external": "npx broken-link-checker-local ./dist -roi --filter-level 3 --exclude \"*/__/firebase/*\" --exclude \"*/stenciljs.com/*\" --exclude \"*/twitter.com/*\" --exclude \"*/gramsbergen.nl/*\" --exclude \"*/bookmydesk.com/\" --exclude \"*/play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral*\" --exclude \"*/phaser.io*\" --exclude \"https://phaser.io/\" --exclude \"*npmjs.com*\""
+    "check-broken-links:external": "npx broken-link-checker-local ./dist -roi --filter-level 3 --exclude \"*/__/firebase/*\" --exclude \"*/stenciljs.com/*\" --exclude \"*/twitter.com/*\" --exclude \"*/gramsbergen.nl/*\" --exclude \"*/bookmydesk.com/\" --exclude \"*/play.google.com/store/apps/details?id=io.github.webbluetoothcg.bletestperipheral*\" --exclude \"*/phaser.io*\" --exclude \"https://phaser.io/\" --exclude \"*npmjs.com*\" --exclude \"*youtube.com/*\" --exclude \"*youtu.be/*\""
   },
   "repository": {
     "type": "git",
