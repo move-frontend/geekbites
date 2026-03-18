@@ -3,6 +3,7 @@
   "version": "2.15.0",
   "description": "Onze blog staat live: http://geekbites.move4mobile.io",
   "main": "index.js",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "eleventy",
@@ -22,8 +23,8 @@
   },
   "homepage": "https://github.com/move4mobile/geekbites#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
-    "@11ty/eleventy-plugin-rss": "^1.2.0",
+    "@11ty/eleventy": "^3.1.5",
+    "@11ty/eleventy-plugin-rss": "^2.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
@@ -34,7 +35,6 @@
     "@semantic-release/release-notes-generator": "^14.0.3",
     "broken-link-checker-local": "^0.2.1",
     "cz-conventional-changelog": "^3.3.0",
-    "eleventy-plugin-dart-sass": "^1.0.3",
     "husky": "^9.0.11",
     "luxon": "^3.4.3",
     "rimraf": "^5.0.5"
@@ -86,5 +86,8 @@
       "@semantic-release/npm",
       "@semantic-release/git"
     ]
+  },
+  "dependencies": {
+    "sass": "^1.98.0"
   }
 }
