@@ -36,8 +36,8 @@ Geek Bites is a static blog site built with Eleventy (11ty) for Move4Mobile deve
 - `src/_data/` - Global data files (site.js, people.json)
 
 ### Build System
-- **Eleventy (.eleventy.js)**: Static site generator configuration
-- **SASS compilation**: Handled by eleventy-plugin-dart-sass
+- **Eleventy (eleventy.config.js)**: Static site generator configuration (ESM)
+- **SASS compilation**: Custom template extension using `sass` package
 - **Syntax highlighting**: Prism.js via @11ty/eleventy-plugin-syntaxhighlight
 - **RSS feed**: Generated via @11ty/eleventy-plugin-rss
 
