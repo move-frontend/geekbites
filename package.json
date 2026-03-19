@@ -2,7 +2,6 @@
   "name": "geekbites",
   "version": "2.15.0",
   "description": "Onze blog staat live: http://geekbites.move4mobile.io",
-  "main": "index.js",
   "type": "module",
   "private": true,
   "scripts": {
@@ -37,7 +36,8 @@
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.0.11",
     "luxon": "^3.4.3",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "sass": "^1.98.0"
   },
   "config": {
     "commitizen": {
@@ -86,8 +86,5 @@
       "@semantic-release/npm",
       "@semantic-release/git"
     ]
-  },
-  "dependencies": {
-    "sass": "^1.98.0"
   }
 }
