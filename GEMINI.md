@@ -7,7 +7,7 @@ Geek Bites is a static blog site built with Eleventy (11ty) for Move4Mobile deve
 
 ## Project Setup
 
-- **Node.js Version:** 22 (from `.nvmrc`)
+- **Node.js Version:** 24 (from `.nvmrc`)
 - **Installation:** `npm ci` or `npm install`
 
 ## Common Commands

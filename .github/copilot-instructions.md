@@ -10,7 +10,7 @@ Geek Bites is a static blog site built with Eleventy (11ty) for Move4Mobile deve
 
 ### Bootstrap and Build the Repository
 
-- **Prerequisites**: Node.js (version 22 recommended, but 20+ works)
+- **Prerequisites**: Node.js (version 24 recommended, but 22+ works)
 - **Install dependencies**: `npm ci` (preferred) or `npm install` - takes ~30 seconds
 - **Build the site**: `npm run build` - takes ~1 second. NEVER CANCEL. Set timeout to 60+ seconds for safety.
 - **Start development server**: `npm run start` - starts immediately on http://localhost:8080
@@ -118,7 +118,7 @@ npm run check-broken-links:external  # External links only (slower)
 
 ## CI/CD Pipeline Notes
 
-- **Build job**: Runs on Node.js 22, uses `npm ci` and `npm run build`
+- **Build job**: Runs on Node.js 24, uses `npm ci` and `npm run build`
 - **Link checking**: Only internal links are checked in CI
 - **Deployment**: Automatic to Firebase hosting on develop/main branches
 - **Artifact**: dist/ directory is archived and deployed
