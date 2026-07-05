@@ -12,7 +12,6 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [22]
         os: [ubuntu-latest]
 
     steps:
@@ -22,17 +21,17 @@ jobs:
           fetch-depth: '0'
           persist-credentials: false
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js from .nvmrc
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: ".nvmrc"
 
       - name: Check cache
         uses: actions/cache@v4
         id: node-cache # use this to check for `cache-hit` (`steps.node-cache.outputs.cache-hit != 'true'`)
         with:
           path: '**/node_modules'
-          key: ubuntu-latest-node-modules-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          key: ubuntu-latest-node-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install node modules
         if: steps.node-cache.outputs.cache-hit != 'true'
@@ -130,7 +129,6 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14]
         os: [ubuntu-latest]
 
     steps:
@@ -144,12 +142,17 @@ jobs:
           name: artifacts
           path: dist
 
+      - name: Use Node.js from .nvmrc
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+
       - name: Check cache
         uses: actions/cache@v4
         id: node-cache # use this to check for `cache-hit` (`steps.node-cache.outputs.cache-hit != 'true'`)
         with:
           path: '**/node_modules'
-          key: ubuntu-latest-node-modules-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          key: ubuntu-latest-node-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install node modules
         if: steps.node-cache.outputs.cache-hit != 'true'

@@ -15,11 +15,10 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [22]
         os: [ubuntu-latest]
         experimental: [false]
         include:
-          - node-version: 23
+          - node-version: 25
             os: ubuntu-latest
             experimental: true
 
@@ -29,7 +28,14 @@ jobs:
         with:
           fetch-depth: '0'
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js from .nvmrc (stable)
+        if: matrix.experimental == false
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Use Node.js ${{ matrix.node-version }} (experimental)
+        if: matrix.experimental == true
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -39,7 +45,7 @@ jobs:
         id: node-cache
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-node-modules-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-modules-${{ matrix.experimental == true && matrix.node-version || 'nvmrc' }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install node modules
         if: steps.node-cache.outputs.cache-hit != 'true'
