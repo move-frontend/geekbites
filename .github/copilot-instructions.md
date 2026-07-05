@@ -10,7 +10,7 @@ Geek Bites is a static blog site built with Eleventy (11ty) for Move4Mobile deve
 
 ### Bootstrap and Build the Repository
 
-- **Prerequisites**: Node.js (version 22 recommended, but 20+ works)
+- **Prerequisites**: Node.js (version 24 recommended, but 22+ works)
 - **Install dependencies**: `npm ci` (preferred) or `npm install` - takes ~30 seconds
 - **Build the site**: `npm run build` - takes ~1 second. NEVER CANCEL. Set timeout to 60+ seconds for safety.
 - **Start development server**: `npm run start` - starts immediately on http://localhost:8080
@@ -71,12 +71,12 @@ Geek Bites is a static blog site built with Eleventy (11ty) for Move4Mobile deve
 - `src/_data/` - Global data files (site.js, people.json)
 - `src/assets/` - Static assets (images, icons)
 - `dist/` - Generated site output (never edit directly)
-- `.eleventy.js` - Eleventy configuration (build customization)
+- `eleventy.config.js` - Eleventy configuration (build customization)
 
 ### Critical Files to Know
 
 - `package.json` - Scripts and dependencies
-- `.eleventy.js` - Site generator configuration
+- `eleventy.config.js` - Site generator configuration
 - `src/_data/site.js` - Site-wide configuration
 - `src/_data/people.json` - Author information
 - `src/styles.scss` - Main SASS entry point
@@ -118,16 +118,16 @@ npm run check-broken-links:external  # External links only (slower)
 
 ## CI/CD Pipeline Notes
 
-- **Build job**: Runs on Node.js 22, uses `npm ci` and `npm run build`
+- **Build job**: Runs on Node.js 24, uses `npm ci` and `npm run build`
 - **Link checking**: Only internal links are checked in CI
 - **Deployment**: Automatic to Firebase hosting on develop/main branches
 - **Artifact**: dist/ directory is archived and deployed
 
 ## Technology Stack Details
 
-- **Static Site Generator**: Eleventy (11ty) v2.0.1
+- **Static Site Generator**: Eleventy (11ty) v3
 - **Templating**: Nunjucks for layouts, Liquid for posts
-- **Styling**: SASS compiled via eleventy-plugin-dart-sass
+- **Styling**: SASS compiled via custom template extension using `sass` package
 - **Syntax Highlighting**: Prism.js via @11ty/eleventy-plugin-syntaxhighlight
 - **RSS**: Generated via @11ty/eleventy-plugin-rss
 - **Hosting**: Firebase hosting

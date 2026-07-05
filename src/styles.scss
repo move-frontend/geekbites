@@ -1,16 +1,16 @@
-@import "src/_sass/variables";
-@import "src/_sass/base";
-@import "src/_sass/type";
-@import "src/_sass/syntax";
-@import "src/_sass/code";
-@import "src/_sass/layout";
-@import "src/_sass/masthead";
-@import "src/_sass/posts";
-@import "src/_sass/tables";
-@import "src/_sass/pagination";
-@import "src/_sass/message";
-@import "src/_sass/author";
+@import "_sass/variables";
+@import "_sass/base";
+@import "_sass/type";
+@import "_sass/syntax";
+@import "_sass/code";
+@import "_sass/layout";
+@import "_sass/masthead";
+@import "_sass/posts";
+@import "_sass/tables";
+@import "_sass/pagination";
+@import "_sass/message";
+@import "_sass/author";
 
-// PrismJS syntax higlighting
-@import "src/assets/prism-theme";
-@import "src/assets/prism-plugins";
+// PrismJS syntax highlighting
+@import "assets/prism-theme";
+@import "assets/prism-plugins";
