@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/move4mobile/geekbites#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.5",
+    "@11ty/eleventy": "^3.1.6",
     "@11ty/eleventy-plugin-rss": "^3.0.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@commitlint/cli": "^21.2.0",
