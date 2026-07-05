@@ -11,7 +11,7 @@ The Framna developer blog — tech articles by and for developers, built with [E
 
 ## Quick start
 
-Requires [Node.js](https://nodejs.org/) — the version is pinned in [`.nvmrc`](.nvmrc) (use [nvm](https://github.com/nvm-sh/nvm) to switch automatically).
+Requires [Node.js](https://nodejs.org/) — the version is pinned in [`.nvmrc`](.nvmrc); run `nvm use` ([nvm](https://github.com/nvm-sh/nvm)) to switch to it.
 
 ```bash
 git clone git@github.com:move-frontend/geekbites.git
@@ -71,7 +71,7 @@ firebase.json           # Firebase Hosting config
 This repo uses **trunk-based development**:
 
 - Branch off `main`, open a PR against `main` (one approving review required).
-- Commits follow [Conventional Commits](https://www.conventionalcommits.org/) — enforced by commitlint via a husky hook.
+- Commits follow [Conventional Commits](https://www.conventionalcommits.org/) — semantic-release derives versions and release notes from them (commitlint is configured; local hook enforcement is not currently wired up on fresh clones).
 - Every merge to `main` **deploys automatically to production**.
 - Releases are fully automated by [semantic-release](https://semantic-release.gitbook.io/): a `feat:` or `fix:` merge produces a GitHub Release with generated notes. Never tag or bump versions manually. Release notes live on the [Releases page](https://github.com/move-frontend/geekbites/releases) (`CHANGELOG.md` is frozen).
 - Dependencies are managed by Dependabot (weekly, grouped).
