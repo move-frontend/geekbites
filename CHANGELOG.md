@@ -1,3 +1,7 @@
+> **This changelog is frozen as of v2.15.0.** Release notes now live on the
+> [GitHub Releases page](https://github.com/move-frontend/geekbites/releases),
+> generated automatically by semantic-release on every release-worthy merge to `main`.
+
 # [2.15.0](https://github.com/move4mobile/geekbites/compare/v2.14.1...v2.15.0) (2025-07-13)
 
 

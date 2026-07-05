@@ -118,9 +118,12 @@ npm run check-broken-links:external  # External links only (slower)
 
 ## CI/CD Pipeline Notes
 
+- **Branch model**: Trunk-based — feature branches branch off `main`, PRs target `main`
 - **Build job**: Runs on Node.js 24, uses `npm ci` and `npm run build`
 - **Link checking**: Only internal links are checked in CI
-- **Deployment**: Automatic to Firebase hosting on develop/main branches
+- **PR previews**: Every PR deploys to a Firebase preview channel (`ci.yml`)
+- **Deployment**: Every push to `main` deploys automatically to production Firebase hosting (`deploy-production.yml`; manual redeploy via workflow_dispatch)
+- **Releases**: semantic-release creates a GitHub Release + tag on release-worthy commits (`feat:`/`fix:`); deploys do NOT depend on releases and `CHANGELOG.md` is frozen
 - **Artifact**: dist/ directory is archived and deployed
 
 ## Technology Stack Details

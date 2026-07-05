@@ -1,24 +1,18 @@
-name: Default Workflow
+name: Deploy Production
 
 on:
   push:
-    branches: [develop, main]
-  pull_request:
-    branches: [develop, main]
+    branches: [main]
   workflow_dispatch:
+
 jobs:
   Build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: '0'
           persist-credentials: false
 
       - name: Use Node.js from .nvmrc
@@ -51,59 +45,12 @@ jobs:
           name: artifacts
           path: dist
 
-  CreatePreview:
-    name: Generate Preview URL
-    if: ${{ github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' }}
-    needs: [Build]
-    runs-on: ubuntu-latest
-    permissions:
-      checks: write
-      pull-requests: write
-    environment:
-      name: Preview Channels
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: artifacts
-          path: dist
-
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
-
-  DeployDevelopment:
-    name: Deploy to Development
-    if: github.event.ref == 'refs/heads/develop'
-    needs: [Build]
-    runs-on: ubuntu-latest
-    environment:
-      name: Development
-      url: 'https://dev.geekbites.move4mobile.io'
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: artifacts
-          path: dist
-
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
-          channelId: live
-
   DeployProduction:
     name: Deploy to Production
-    needs: [CreateRelease]
+    needs: [Build]
     runs-on: ubuntu-latest
     environment:
-      name: Production
+      name: production
       url: 'https://geekbites.move4mobile.io'
     steps:
       - uses: actions/checkout@v4
@@ -122,14 +69,10 @@ jobs:
 
   CreateRelease:
     name: Create Release
-    if: ${{ github.event.ref == 'refs/heads/main' && ! contains(github.event.head_commit.message, '[skip-ci]') }}
+    # Only on push — a manual redeploy (workflow_dispatch) should never cut a release.
+    if: github.event_name == 'push'
     needs: [Build]
-
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -160,12 +103,9 @@ jobs:
         env:
           CI: true
 
-      - name: Prepare artifacts folder
-        working-directory: ${{ github.workspace }}
-        run: mkdir artifacts
-
-      - name: Build artifact
+      - name: Zip site artifact
         run: |
+          mkdir -p artifacts
           zip -r ./artifacts/site ./dist/*
 
       - name: Semantic release

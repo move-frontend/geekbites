@@ -47,9 +47,11 @@ Geek Bites is a static blog site built with Eleventy (11ty) for Move4Mobile deve
 - Posts automatically get "posts" tag and use post layout
 - Permalink structure: `{{ date | ymd }}/{{ title | slugify }}/`
 
-### Deployment
+### Deployment & Branch Model
+- Trunk-based development: feature branches → PR → `main` (no develop branch)
+- Every PR gets a Firebase preview channel; every push to `main` auto-deploys to production (`deploy-production.yml`)
+- semantic-release creates GitHub Releases + tags on `feat:`/`fix:` merges; deploys do not depend on releases; `CHANGELOG.md` is frozen
 - Firebase hosting configured (firebase.json)
-- Semantic release configured for automated versioning
 - Husky hooks for commit message linting (conventional commits)
 
 ### Data Sources

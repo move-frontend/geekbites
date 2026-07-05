@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js from .nvmrc
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Check cache
+        uses: actions/cache@v4
+        id: node-cache # use this to check for `cache-hit` (`steps.node-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: '**/node_modules'
+          key: ubuntu-latest-node-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install node modules
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: npm ci
+        env:
+          CI: true
+
+      - name: Build artifact
+        run: npm run build
+
+      - name: Check for broken links
+        run: npm run check-broken-links:internal
+
+      - name: Archive artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifacts
+          path: dist
+
+  CreatePreview:
+    name: Generate Preview URL
+    if: ${{ github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' }}
+    needs: [Build]
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+    environment:
+      name: Preview Channels
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: artifacts
+          path: dist
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
