@@ -63,7 +63,10 @@
         {
           "assets": [
             "artifacts/**"
-          ]
+          ],
+          "successComment": false,
+          "failComment": false,
+          "failTitle": false
         }
       ]
     ]
