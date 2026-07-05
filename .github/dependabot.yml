@@ -1,8 +1,11 @@
 # Managed by galaxy-brain — regenerate with `audit-dependabot` or edit deliberately.
 # Source: discipline-frontend/galaxy-brain.yml § standards.dependabot
 # Project extensions (documented in project-geekbites/galaxy-brain.yml → standards-override):
-#   - `automerge` label (consumed by .github/workflows/automerge.yml)
 #   - `eleventy` group (project stack; not part of the discipline recipes)
+# Dependabot PRs are reviewed and merged by a human — `main` requires an
+# approving review, so there is no auto-merge. (The former `automerge` label +
+# .github/workflows/automerge.yml were a no-op under branch protection and were
+# removed.)
 version: 2
 
 updates:
@@ -16,7 +19,6 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - 'dependencies'
-      - 'automerge'
     cooldown:
       default-days: 3
       semver-patch-days: 2
@@ -55,7 +57,6 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - 'dependencies'
-      - 'automerge'
     # github-actions has no semver semantics for Dependabot cooldowns —
     # only default-days is supported for this ecosystem.
     cooldown:
