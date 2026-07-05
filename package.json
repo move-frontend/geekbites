@@ -13,24 +13,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/move4mobile/geekbites.git"
+    "url": "https://github.com/move-frontend/geekbites.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/move4mobile/geekbites/issues"
+    "url": "https://github.com/move-frontend/geekbites/issues"
   },
-  "homepage": "https://github.com/move4mobile/geekbites#readme",
+  "homepage": "https://github.com/move-frontend/geekbites#readme",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
     "@11ty/eleventy-plugin-rss": "^3.0.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@commitlint/cli": "^21.2.0",
     "@commitlint/config-conventional": "^21.2.0",
-    "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/npm": "^13.1.5",
     "@semantic-release/release-notes-generator": "^14.1.1",
     "broken-link-checker-local": "^0.2.1",
     "cz-conventional-changelog": "^3.3.0",
@@ -58,23 +55,9 @@
     "branches": [
       "main"
     ],
-    "prepare": [
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      {
-        "path": "@semantic-release/git",
-        "assets": [
-          "package.json",
-          "package-lock.json",
-          "CHANGELOG.md"
-        ],
-        "message": "chore(release): ${nextRelease.version} [skip-ci]\n\n${nextRelease.notes}"
-      }
-    ],
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
       [
         "@semantic-release/github",
         {
@@ -82,9 +65,7 @@
             "artifacts/**"
           ]
         }
-      ],
-      "@semantic-release/npm",
-      "@semantic-release/git"
+      ]
     ]
   }
 }

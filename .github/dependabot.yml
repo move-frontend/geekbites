@@ -1,14 +1,68 @@
+# Managed by galaxy-brain — regenerate with `audit-dependabot` or edit deliberately.
+# Source: discipline-frontend/galaxy-brain.yml § standards.dependabot
+# Project extensions (documented in project-geekbites/galaxy-brain.yml → standards-override):
+#   - `automerge` label (consumed by .github/workflows/automerge.yml)
+#   - `eleventy` group (project stack; not part of the discipline recipes)
 version: 2
+
 updates:
-  # Configuration for npm
   - package-ecosystem: 'npm'
-    directory: .
+    directory: '/'
     schedule:
-      # Check the npm registry for updates at 4am UTC
-      interval: 'daily'
-      time: '04:00'
-    open-pull-requests-limit: 20
-    target-branch: 'integration/dependabot'
+      interval: 'weekly'
+      day: 'monday'
+      time: '07:00'
+      timezone: 'Europe/Amsterdam'
+    open-pull-requests-limit: 10
     labels:
       - 'dependencies'
       - 'automerge'
+    cooldown:
+      default-days: 3
+      semver-patch-days: 2
+      semver-minor-days: 4
+      semver-major-days: 5
+      exclude:
+        - '@angular/*'
+        - '@angular-devkit/*'
+        - '@angular-builders/*'
+        - '@schematics/angular'
+        - '@nx/*'
+        - 'nx'
+    groups:
+      eleventy:
+        applies-to: version-updates
+        patterns:
+          - '@11ty/*'
+      release-tools:
+        applies-to: version-updates
+        patterns:
+          - '@semantic-release/*'
+          - 'semantic-release'
+          - '@commitlint/*'
+          - 'commitlint'
+          - 'commitizen'
+          - 'husky'
+          - 'lint-staged'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '07:00'
+      timezone: 'Europe/Amsterdam'
+    open-pull-requests-limit: 10
+    labels:
+      - 'dependencies'
+      - 'automerge'
+    cooldown:
+      default-days: 3
+      semver-patch-days: 2
+      semver-minor-days: 4
+      semver-major-days: 5
+    groups:
+      github-actions:
+        applies-to: version-updates
+        patterns:
+          - '*'
