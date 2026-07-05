@@ -1,3 +1,10 @@
+# [2.15.0](https://github.com/move4mobile/geekbites/compare/v2.14.1...v2.15.0) (2025-07-13)
+
+
+### Features
+
+* remove/filter broken links ([#464](https://github.com/move4mobile/geekbites/issues/464)) ([09377c8](https://github.com/move4mobile/geekbites/commit/09377c86f415e96dbf2f23f423e1a37dba15c284))
+
 ## [2.14.1](https://github.com/move4mobile/geekbites/compare/v2.14.0...v2.14.1) (2023-09-03)
 
 
