@@ -1,62 +1,81 @@
 # Geek Bites
 
-You can find our blog here: https://geekbites.move4mobile.io
+[![Deploy Production](https://github.com/move-frontend/geekbites/actions/workflows/deploy-production.yml/badge.svg)](https://github.com/move-frontend/geekbites/actions/workflows/deploy-production.yml)
+[![Nightly Build](https://github.com/move-frontend/geekbites/actions/workflows/nightly.yml/badge.svg)](https://github.com/move-frontend/geekbites/actions/workflows/nightly.yml)
+[![Latest Release](https://img.shields.io/github/v/release/move-frontend/geekbites)](https://github.com/move-frontend/geekbites/releases)
+[![License](https://img.shields.io/github/license/move-frontend/geekbites)](LICENSE)
 
-## Getting Started
+The Framna developer blog — tech articles by and for developers, built with [Eleventy](https://www.11ty.dev/).
 
-Follow these steps to set up the Geek Bites blog locally and start contributing:
+**Read it live: <https://geekbites.move4mobile.io>**
 
-### Prerequisites
+## Quick start
 
-First, make sure you have Node.js installed on your system. Eleventy requires Node.js version 8 or newer.
-
-Check your Node.js version:
-```bash
-node --version
-```
-
-### Installation
-
-1. Clone this repository to your local machine
-2. Navigate to the project directory
-3. Install the project dependencies:
+Requires [Node.js](https://nodejs.org/) — the version is pinned in [`.nvmrc`](.nvmrc) (use [nvm](https://github.com/nvm-sh/nvm) to switch automatically).
 
 ```bash
-npm install
-```
-
-### Development
-
-To start the development server with live reload:
-
-```bash
+git clone git@github.com:move-frontend/geekbites.git
+cd geekbites
+nvm use
+npm ci
 npm run start
 ```
 
-This will:
-- Clear the `dist` directory
-- Start the Eleventy development server
-- Watch for file changes and automatically rebuild
-- Serve the site locally (usually at `http://localhost:8080`)
+The dev server runs at `http://localhost:8080` with live reload.
 
-### Building for Production
+## Writing a blog post
 
-To build the site for production:
+1. Create a Markdown file in [`src/posts/`](src/posts/), named `YYYY-MM-DD-your-title.md`.
+2. Add front matter:
 
-```bash
-npm run build
+   ```yaml
+   ---
+   title: 'Your post title'
+   category: ai-tools
+   tags: comma, separated, tags
+   author: michael
+   min_read: 5
+   date: 2026-07-05
+   permalink: /2026/07/05/your-title/
+   ---
+   ```
+
+3. The `author` key must match an entry in [`src/_data/people.json`](src/_data/people.json) — add yourself there if this is your first post.
+4. Open a pull request. Every PR automatically gets a **Firebase preview channel** so reviewers can read your post on a live URL.
+
+## Available scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run start` | Dev server with live reload (cleans `dist/` first) |
+| `npm run build` | Production build to `dist/` |
+| `npm run check-broken-links` | Check internal + external links in the built site |
+| `npm run check-broken-links:internal` | Internal links only (fast — also runs in CI) |
+| `npm run check-broken-links:external` | External links only (slow) |
+
+## Project structure
+
+```
+src/
+├── posts/              # Blog posts (Markdown)
+├── _includes/layouts/  # Nunjucks templates
+├── _sass/              # Sass stylesheets
+├── _data/              # Site config + author data
+└── assets/             # Images and icons
+eleventy.config.js      # Eleventy configuration (ESM)
+firebase.json           # Firebase Hosting config
 ```
 
-This will generate all the static files needed for deployment in the `dist` directory.
+## Contributing & deployment
 
-### Writing Blog Posts
+This repo uses **trunk-based development**:
 
-After setting up the project, you're ready to write your own Geek Bites blog posts! Blog posts are located in the `src/posts` directory and are written in Markdown format.
+- Branch off `main`, open a PR against `main` (one approving review required).
+- Commits follow [Conventional Commits](https://www.conventionalcommits.org/) — enforced by commitlint via a husky hook.
+- Every merge to `main` **deploys automatically to production**.
+- Releases are fully automated by [semantic-release](https://semantic-release.gitbook.io/): a `feat:` or `fix:` merge produces a GitHub Release with generated notes. Never tag or bump versions manually. Release notes live on the [Releases page](https://github.com/move-frontend/geekbites/releases) (`CHANGELOG.md` is frozen).
+- Dependencies are managed by Dependabot (weekly, grouped).
 
-## Tips
+## License
 
-- If you encounter vulnerabilities after running `npm install`, you can run `npm audit fix` to fix them automatically, or `npm audit` for more details
-- The site uses Eleventy (11ty) as a static site generator
-- Styles are processed with Sass and located in the `src/_sass` directory
-
-Good luck with your blogging!
+[Apache 2.0](LICENSE)
