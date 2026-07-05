@@ -57,7 +57,6 @@ updates:
     open-pull-requests-limit: 10
     labels:
       - 'dependencies'
-      - 'automerge'
     # github-actions has no semver semantics for Dependabot cooldowns —
     # only default-days is supported for this ecosystem.
     cooldown:
