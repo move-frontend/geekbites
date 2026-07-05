@@ -5,6 +5,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "prepare": "husky",
     "build": "eleventy",
     "start": "rimraf dist && eleventy --serve",
     "check-broken-links": "npm run check-broken-links:internal && npm run check-broken-links:external",
@@ -39,11 +40,6 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "commitlint": {
