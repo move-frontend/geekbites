@@ -30,13 +30,13 @@ jobs:
 
       - name: Use Node.js from .nvmrc (stable)
         if: matrix.experimental == false
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version-file: ".nvmrc"
 
       - name: Use Node.js ${{ matrix.node-version }} (experimental)
         if: matrix.experimental == true
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
 
